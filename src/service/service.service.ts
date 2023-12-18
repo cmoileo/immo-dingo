@@ -4,40 +4,23 @@ import { UpdateServiceDto } from './dto/update-service.dto';
 
 @Injectable()
 export class ServiceService {
-  private services = []; 
-
   create(createServiceDto: CreateServiceDto) {
-    this.services.push(createServiceDto);
-    return createServiceDto;
+    return 'This action adds a new service';
   }
 
   findAll() {
-    return this.services;
+    return `This action returns all service`;
   }
 
   findOne(id: number) {
-    const service = this.services.find(service => service.id === id);
-    if (!service) {
-      throw new Error(`Service with ID ${id} not found`);
-    }
-    return service;
+    return `This action returns a #${id} service`;
   }
 
   update(id: number, updateServiceDto: UpdateServiceDto) {
-    const serviceIndex = this.services.findIndex(service => service.id === id);
-    if (serviceIndex === -1) {
-      throw new Error(`Service with ID ${id} not found`);
-    }
-    this.services[serviceIndex] = { ...this.services[serviceIndex], ...updateServiceDto };
-    return this.services[serviceIndex];
+    return `This action updates a #${id} service`;
   }
 
   remove(id: number) {
-    const serviceIndex = this.services.findIndex(service => service.id === id);
-    if (serviceIndex === -1) {
-      throw new Error(`Service with ID ${id} not found`);
-    }
-    this.services.splice(serviceIndex, 1);
-    return { message: `Service with ID ${id} has been removed` };
+    return `This action removes a #${id} service`;
   }
 }

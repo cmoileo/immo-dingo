@@ -1,6 +1,7 @@
-import { CommonEntity } from "src/commun/commun.entity";
-import { UserEntity } from "src/user/entities/user.entity";
+
 import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { CommonEntity } from "../../commun/commun.entity";
+import { UserEntity } from "../../user/entities/user.entity";
 
 @Entity('advert')
 export class AdvertEntity extends CommonEntity {
@@ -9,6 +10,21 @@ export class AdvertEntity extends CommonEntity {
 
     @Column()
     title: string
+
+    @Column()
+    price: number
+
+    @Column()
+    nb_rooms: number
+
+    @Column()
+    square_meters: number
+
+    @Column()
+    phoneNumber: string
+
+    @Column()
+    description: string
     
     @ManyToOne(() => UserEntity, (user) => user.adverts, { nullable: true })
     user: UserEntity

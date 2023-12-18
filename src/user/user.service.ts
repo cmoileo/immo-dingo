@@ -21,13 +21,18 @@ export class UserService {
     }
   }
 
-  async findAll() {
+  async findAll(query: string, order_by?: 'name' | 'created_at', order?: 'ASC' | 'DESC', per_page?: number, page?: number) {
     try {
-      const users = await this.userRepository.createQueryBuilder("user")
+      const queryBuilder = this.userRepository.createQueryBuilder("user")
         .leftJoinAndSelect("user.adverts", "advert")
-        .getMany()
+        .where("user.name LIKE :query", { query: `%${query}%` })
+        .orderBy(`user.${order_by}`, order)
+        .skip((page - 1) * per_page)
+        .take(per_page);
 
-      return users
+      const users = await queryBuilder.getMany();
+
+      return users;
     } catch (error) {
       throw new Error(error)
     }

@@ -13,8 +13,8 @@ export class UserController {
   }
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  findAll(@Body() query: string) {
+    return this.userService.findAll(query);
   }
 
   @Get(':id')
